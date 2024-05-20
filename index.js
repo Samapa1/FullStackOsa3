@@ -41,6 +41,8 @@ app.use(cors())
 
 app.use(express.json())
 
+app.use(express.static('dist'))
+
 // tehtävä 3.8
 // app.use(morgan('tiny'))
 
