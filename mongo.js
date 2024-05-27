@@ -1,3 +1,5 @@
+// tehtävä 3.12
+
 const mongoose = require('mongoose')
 
 if (process.argv.length<3) {
@@ -9,7 +11,7 @@ const password = process.argv[2]
 
 const url =
   `mongodb+srv://samapa:${password}@cluster0.nrotuv0.mongodb.net/phoneBookApp?retryWrites=true&w=majority&appName=Cluster0`
-  
+
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url)
@@ -23,19 +25,19 @@ const Person = mongoose.model('Person', numberSchema)
 
 if (process.argv[3] && process.argv[4]) {
 
-const person= new Person({
+  const person= new Person({
     name: process.argv[3],
     number: process.argv[4]
   })
 
-person.save().then(result => {
-console.log(`added ${person.name} ${person.number} to the phonebook`)
-mongoose.connection.close()
-})
+  person.save().then(result => {
+    console.log(`added ${person.name} ${person.number} to the phonebook`)
+    mongoose.connection.close()
+  })
 
 } else {
-console.log("phonebook:")
-Person.find({}).then(result => {
+  console.log('phonebook:')
+  Person.find({}).then(result => {
     result.forEach(person => {
       console.log(`${person.name} ${person.number}`)
     })

@@ -13,13 +13,13 @@ mongoose.connect(url)
     console.log('error connecting to MongoDB:', error.message)
   })
 
-  const validateNumber = (num) => {
-    let parts = num.split("-")
-    if (parts[0].length >1 && parts[0].length <4 && parts[0].length + parts[1].length >7) {
-      return true
-    }
-    return false
+const validateNumber = (num) => {
+  let parts = num.split('-')
+  if (parts[0].length >1 && parts[0].length <4 && parts[0].length + parts[1].length >7) {
+    return true
   }
+  return false
+}
 
 
 const numberSchema = new mongoose.Schema({
@@ -31,10 +31,8 @@ const numberSchema = new mongoose.Schema({
   number: {
     type: String,
     validate: {
-      validator: function(num) {
-        return validateNumber(num)
-      },
-      message: "Please write the number (minimum 8 digits) in one of the following formats: 123-12345 or 12-123456"
+      validator: validateNumber,
+      message: 'Please write the number (minimum 8 digits) in one of the following formats: 123-12345 or 12-123456'
     }
   }
 })
