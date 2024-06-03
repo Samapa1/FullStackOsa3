@@ -6,7 +6,7 @@ const url = process.env.MONGODB_URI
 
 console.log('connecting to', url)
 mongoose.connect(url)
-  .then(result => {
+  .then( () => {
     console.log('connected to MongoDB')
   })
   .catch((error) => {
@@ -14,13 +14,21 @@ mongoose.connect(url)
   })
 
 const validateNumber = (num) => {
-  let parts = num.split('-')
-  if (parts[0].length >1 && parts[0].length <4 && parts[0].length + parts[1].length >7) {
-    return true
+  let count = 0
+  for (let i = 0; i < num.length; i++) {
+    if (num[i] === '-') {
+      count++
+    }
+  }
+
+  if (count === 1) {
+    let parts = num.split('-')
+    if (parts[0].length >1 && parts[0].length <4 && parts[0].length + parts[1].length >7) {
+      return true
+    }
   }
   return false
 }
-
 
 const numberSchema = new mongoose.Schema({
   name: {
