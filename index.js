@@ -39,7 +39,7 @@ app.use(express.static('dist'))
 
 app.use(morgan(':method :url :status :res[content-length] :response-time ms :personData'))
 
-app.get('/api/info', (request, response) => {
+app.get('/info', (request, response) => {
   let dateTime = new Date()
   let counts = 0
   Person.countDocuments({}).then(count => {
